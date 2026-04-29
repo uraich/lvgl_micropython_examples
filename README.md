@@ -1,5 +1,5 @@
 # lvgl micropython examples
-[LVGL](https://github.com/lvgl) the **l**ight and **v**ersatile embedded **g**raphics **l**ibray comes with extensive documentation and a large number of [example programs](https://lvgl.io/docs/open/examples). LVGL is written in C and programs using it would normally be written in C as well. 
+[LVGL](https://github.com/lvgl), the **l**ight and **v**ersatile embedded **g**raphics **l**ibray comes with extensive documentation and a large number of [example programs](https://lvgl.io/docs/open/examples). LVGL is written in C and programs using it would normally be written in C as well. 
 There is however also a Python language binding allowing it to by used with MicroPython. These bindings have been started by A. Gonnen and are now further developed by K. Schlosser. He has substantially improved these bindings. You can find the source code of MicroPython with the lvgl bindings included in the [lvgl_micropython](https://github.com/lvgl-micropython). Unfortunately the number of example programs written for the binding is rather scarse.
 It is the objective of this project to port as many of the lvgl C examples to MicroPython as possible.
 # An ESP32 board being able to run lvgl_micropython
