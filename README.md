@@ -29,14 +29,14 @@ I therefore called `display.init(1)`.
 Now the program ran but the screen stayed black.
 
 Looking at the driver code I found that the LCD backlight was switched off by default and must be switched on by the application.
-`display.set_backlight(ON)` where ON=1. This switched th backlight on but I still did not see anything on the screen. 
+`display.set_backlight(ON)` where ON=1. This switched the backlight on but, I still did not see anything on the screen. 
 
-I figured out, that the flush_cb callback copying, the graphics from the framebuffer in memory, was never called.
-The task_handler was missing and must be called with `th = task_handle.TaskHandler()`. The task_handler is responsible for screen updates and for events coming from the touch panel.r
+I figured out, that the flush_cb callback, copying, the graphics from the framebuffer in memory, was never called.
+The task_handler was missing and must be called with `th = task_handle.TaskHandler()`. The task_handler is responsible for screen updates and for events coming from the touch panel.
 This finally gave me an image on the screen but the colors were not what I expected.
 # Colors
-There are 3 parameters you must get right to have the correct colors: On my screen I got white instead of black text. This can be corrected with : `display.set_color_inversion(1)`. Then there are screen with take the rgb color components in this order: r,b,g but there are others which expect b,r,g. This can be adapted with color_space=lv.COLOR_FORMAT.RGB565 when initializing the display. 
-The color is defined in rgb565 format (5 bits red, 6 bits green and 5 bits blue) which is a 16 bit number. To make sure that these 2 bytes are written in the correct order you can set rgb565_byte_swap=True, again in the display initalization.
+There are 3 parameters you must get right to have the correct colors: On my screen I got white instead of black text. This can be corrected with : `display.set_color_inversion(1)`. Then there are screens, which take the rgb color components in this order: r,b,g but there are others which expect b,r,g. This can be adapted with `color_space=lv.COLOR_FORMAT.RGB565` when initializing the display. 
+The color is defined in rgb565 format (5 bits red, 6 bits green and 5 bits blue) which is a 16 bit number. To make sure that these 2 bytes are written in the correct order you can set `rgb565_byte_swap=True`, again in the display initalization.
 
 # Header amd trailer files
 For any program you write, you will need the same hardware initialization and an endless loop at the end of your program. I extracted these into a header.py and a trailer.py file. Your application must then only provide the GUI code. In order to get a working executable you have to concatenate header.py your_program.py and trailer.py
