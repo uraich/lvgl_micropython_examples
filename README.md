@@ -20,3 +20,24 @@ esptool --chip esp32s3 -p /dev/ttyACM0 -b 460800 --before default_reset --after 
 ```
 This allowed me to flash my new system.
 
+# Running a hello world application
+The es3n28p has plenty of peripherals using plenty of ESP32 pins. I therefore wrote a pin allocation file giving recognizable names to each of the pins. You find it in the esp32 folder with the name hw_es3n28p.py.
+Then I wrote a first hello world program, that was supposed to print "Hello World" in black letters on a red screen. This program first initialized SPI with the correct pin numbers and the creates a display_bus adding the data/cmd, chip select and bus frequency specs.
+After that, the display object is created specifying horizontal and vertical pixel numbers, backlight pin ...
+I followed the main.py from the temp_humidity_micropython_lvgl project, referenced on the lvgl_micropython README. When trying to initialize the display, the program crashed. In contrast to the main.py example program, display.init needs a display type to find the correct initialization data for the ili93341 chip. The init routine uses a None parameter as default, but the file name created, which should point to file with the initialization values (_ili9341_init) does not exist. Giving a type parameter of 1 or 2 helped.
+I therefore called `display.init(1)`.
+Now the program ran but the screen stayed black.
+
+Looking at the driver code I found that the LCD backlight was switched off by default and must be switched on by the application.
+`display.set_backlight(ON)` where ON=1. This switched th backlight on but I still did not see anything on the screen. 
+
+I figured out, that the flush_cb callback copying, the graphics from the framebuffer in memory, was never called.
+The task_handler was missing and must be called with `th = task_handle.TaskHandler()`. The task_handler is responsible for screen updates and for events coming from the touch panel.r
+This finally gave me an image on the screen but the colors were not what I expected.
+# Colors
+There are 3 parameters you must get right to have the correct colors: On my screen I got white instead of black text. This can be corrected with : `display.set_color_inversion(1)`. Then there are screen with take the rgb color components in this order: r,b,g but there are others which expect b,r,g. This can be adapted with color_space=lv.COLOR_FORMAT.RGB565 when initializing the display. 
+The color is defined in rgb565 format (5 bits red, 6 bits green and 5 bits blue) which is a 16 bit number. To make sure that these 2 bytes are written in the correct order you can set rgb565_byte_swap=True, again in the display initalization.
+
+
+
+
