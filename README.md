@@ -28,5 +28,8 @@ esptool --chip esp32s3 -p /dev/ttyACM0 -b 460800 --before default_reset --after 
 e 8MB --flash_freq 80m --erase-all 0x0 /opt/ucc/micros/esp32/lvgl_micropython/build/lvgl_micropy_ESP32_GENERIC_S3-SPIRAM_OCT-8.bin
 
 Once the system was running it was time to try the hello world app on the board instead of running it in Ubuntu. First I tried a program (literaly _hello world_), print hello world on the screen. I tried to follow the structure of temp_humidity_micropython_lvgl project referenced on Kevin's github page.
+# A Hello World program
+I already told you about all the peripherals on the board. In order to not re-write code for all the differen pin numbers I created a pin definition file that I could include into my lvgl apps giving understandable names to each of the pins.
 
+The screen is controlled by an ILI9341V driver chip running on 4 channel SPI
 
