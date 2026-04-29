@@ -38,6 +38,8 @@ This finally gave me an image on the screen but the colors were not what I expec
 There are 3 parameters you must get right to have the correct colors: On my screen I got white instead of black text. This can be corrected with : `display.set_color_inversion(1)`. Then there are screen with take the rgb color components in this order: r,b,g but there are others which expect b,r,g. This can be adapted with color_space=lv.COLOR_FORMAT.RGB565 when initializing the display. 
 The color is defined in rgb565 format (5 bits red, 6 bits green and 5 bits blue) which is a 16 bit number. To make sure that these 2 bytes are written in the correct order you can set rgb565_byte_swap=True, again in the display initalization.
 
-
+# Header amd trailer files
+For any program you write, you will need the same hardware initialization and an endless loop at the end of your program. I extracted these into a header.py and a trailer.py file. Your application must then only provide the GUI code. In order to get a working executable you have to concatenate header.py your_program.py and trailer.py
+`cat header.py your_program.py trailer.py > executable.py.
 
 
