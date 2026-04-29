@@ -1,1 +1,9 @@
 # lvgl micropython examples
+[LVGL](https://github.com/lvgl) the **l**ight and **v**ersatile embedded **g**raphics **l**ibray comes with extensive documentation and a large number of [example programs](https://lvgl.io/docs/open/examples). LVGL is written in C and programs using it would normally be written in C as well. 
+There is however also a Python language binding allowing it to by used with MicroPython. These bindings have been started by A. Gonnen and are now further developed by K. Schlosser. He has substantially improved these bindings. You can find the source code of MicroPython with the lvgl bindings included in the [lvgl_micropython](https://github.com/lvgl-micropython). Unfortunately the number of example programs written for the binding is rather scarse.
+It is the objective of this project to port as many of the lvgl C examples to MicroPython.
+# An ESP32 board being able to run lvgl_micropython
+Recently I bought an ESP32S3 board with a 320x240 LCD display and a touch panel from aliexpress. On their site it is named:
+`ESP32-S3 Development Board Wifi Bluetooth Intelligent Display Screen 2.8 Inch TFT Module Touch Screen Type C ES3N28P ES3C28`. It comes with a complete useless user manual giving no programming information at all. I asked the seller for more information but he told me that they had none. With the help of a WEB search engine and chatGPT I was able to figure out that I had bought a LCD Wiki es3n28p board. On the [LCD Wiki page](https://www.lcdwiki.com/2.8inch_ESP32-S3_Display) I found all the information needed, including the pinouts and a circuit diagram. The CPU is a ESP32S3 with 8 MB of PSRAM and 16 MB of flash. In addition to the screen and touch pannel it has an audio system (microphone and speaker), a SD card holder, a RGB LED and a few more gadgets.
+
+# Bringing up lvgl_micropython
