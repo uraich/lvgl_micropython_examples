@@ -13,8 +13,10 @@ The compile command given Kevin's README worked with a flaw and in found the lvg
 The ES3N28P came with a lvgl demo installed in flash. It proved that the board was working, but was useless otherwise. From Kevin's README I figured out that this was the compile command I should use for my system:
 `python3 make.py esp32 BOARD=ESP32_GENERIC_S3 BOARD_VARIANT=SPIRAM_OCT DISPLAY=ILI9341 INDEV=FT6x36 PORT=/dev/ttyACM0 deploy`.
 I created a simple shell script with the command such that I did not have to retype it at every build attempt.
-When running it, the builder.esp32.py build program crashed. The problem was that the script expected the esp-idf python environment in ~/.espressif/python_env/esp-idf-version_env while install.sh in esp-idf install the virtual environment on ~/virtualenvs/esp-idf. I am runner the virtualenvwrapper on my machine. I this the reason? Anyway ... modifying builder/esp32.py allowed me to build the binary. The deploy command however failed. I therefore wrote a flash.sh script with the command:
-`esptool --chip esp32s3 -p /dev/ttyACM0 -b 460800 --before default_reset --after hard_reset write_flash --flash_mode dio --flash_siz
-e 8MB --flash_freq 80m --erase-all 0x0 /opt/ucc/micros/esp32/lvgl_micropython/build/lvgl_micropy_ESP32_GENERIC_S3-SPIRAM_OCT-8.bin`.
+When running it, the builder.esp32.py build program crashed. The problem was that the script expected the esp-idf python environment in ~/.espressif/python_env/esp-idf-version_env while install.sh in esp-idf install the virtual environment on ~/virtualenvs/esp-idf. I am runner the virtualenvwrapper on my machine. I this the reason? Anyway ... modifying builder/esp32.py allowed me to build the binary. The deploy command however failed. I therefore wrote a flash.sh script with the command (build/lvgl_micropy_ESP32_GENERIC_S3-SPIRAM_OCT-8.bin is the name of the firmware file).
+```
+esptool --chip esp32s3 -p /dev/ttyACM0 -b 460800 --before default_reset --after hard_reset write_flash --flash_mode dio 
+--flash_size 8MB --flash_freq 80m --erase-all 0x0 /opt/ucc/micros/esp32/lvgl_micropython/build/lvgl_micropy_ESP32_GENERIC_S3-SPIRAM_OCT-8.bin
+```
 This allowed me to flash my new system.
 
