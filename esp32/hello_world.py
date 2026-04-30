@@ -67,11 +67,6 @@ print("display: ",display)
 print("Display initialized")
 
 print("Backlight: ",display.get_backlight())
-def event_loop():
-    while lv.screen_active(): # exit when the screen is closed
-        sleep_ms(5)
-        lv.task_handler()
-        # lcd_bus._pump_main_thread()
         
 scrn = lv.screen_active()
 scrn.set_style_bg_color(lv.color_hex(0xff0000), 0)
@@ -84,6 +79,8 @@ label.set_style_text_color(lv.color_hex(0x000000), lv.PART.MAIN)
 scrn.set_style_bg_opa(lv.OPA.COVER,0)
 label.align(lv.ALIGN.CENTER, 0, 0)
 
+import task_handler
+th = task_handler.TaskHandler()
 while True:
     try:
         sleep_ms(100)
