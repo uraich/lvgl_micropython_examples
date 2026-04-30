@@ -1,0 +1,65 @@
+ARCLABEL_TEXT = "I'm on an #FA7C45 ARC#! Centered with #12c2E9 C##8B68E8 O##c471ed L##B654E5 O##C84AB2 R##DB417A F##f64659 U##ff8888 L# feature!\n";
+
+scr.set_style_bg_color(lv.color_black(), lv.PART.MAIN)
+
+arclabel_inner = lv.arclabel(scr)
+arclabel_inner.set_size(200, 200)
+arclabel_inner.set_style_text_color(lv.color_white(), lv.PART.MAIN)
+arclabel_inner.set_text_static(ARCLABEL_TEXT)
+arclabel_inner.set_angle_start(180)
+arclabel_inner.set_radius(lv.pct(80))
+arclabel_inner.set_recolor(True)
+arclabel_inner.set_text_vertical_align(lv.arclabel.TEXT_ALIGN.TRAILING)
+arclabel_inner.set_dir(lv.arclabel.DIR.COUNTER_CLOCKWISE)
+arclabel_inner.set_text_horizontal_align(lv.arclabel.TEXT_ALIGN.CENTER)
+arclabel_inner.center()
+
+arclabel_outer = lv.arclabel(scr)
+arclabel_outer.set_size(200, 200)
+arclabel_outer.set_style_text_letter_space(2, lv.PART.MAIN)
+arclabel_outer.set_style_text_color(lv.color_hex(0x888888), lv.PART.MAIN)
+arclabel_outer.set_angle_start(-180)
+arclabel_outer.set_text_static(ARCLABEL_TEXT)
+arclabel_outer.set_radius(lv.pct(100))
+arclabel_outer.set_recolor(True)
+arclabel_outer.set_text_vertical_align(lv.arclabel.TEXT_ALIGN.LEADING)
+arclabel_outer.set_dir(lv.arclabel.DIR.CLOCKWISE)
+arclabel_outer.set_text_horizontal_align(lv.arclabel.TEXT_ALIGN.CENTER)
+arclabel_outer.center()
+
+arclabel_slogan_1 = lv.arclabel(scr)
+arclabel_slogan_1.set_size(300, 200)
+arclabel_slogan_1.set_style_text_letter_space(2, lv.PART.MAIN)
+arclabel_slogan_1.set_style_text_color(lv.palette_main(lv.PALETTE.AMBER), lv.PART.MAIN)
+arclabel_slogan_1.set_text_static("STAY HUNGRY")
+arclabel_slogan_1.set_offset(30)
+arclabel_slogan_1.set_radius(150)
+arclabel_slogan_1.set_recolor(True)
+arclabel_slogan_1.set_text_vertical_align(lv.arclabel.TEXT_ALIGN.TRAILING)
+arclabel_slogan_1.set_text_horizontal_align(lv.arclabel.TEXT_ALIGN.CENTER)
+arclabel_slogan_1.set_dir(lv.arclabel.DIR.COUNTER_CLOCKWISE)
+arclabel_slogan_1.center()
+
+arclabel_slogan_2 = lv.arclabel(scr)
+arclabel_slogan_2.set_size(300, 200)
+arclabel_slogan_2.set_style_text_letter_space(2, lv.PART.MAIN)
+arclabel_slogan_2.set_style_text_color(lv.palette_main(lv.PALETTE.AMBER), lv.PART.MAIN)
+arclabel_slogan_2.set_text_static("STAY FOOLISH")
+arclabel_slogan_2.set_offset(30)
+arclabel_slogan_2.set_radius(150)
+arclabel_slogan_2.set_angle_start(180)
+arclabel_slogan_2.set_recolor(True)
+arclabel_slogan_2.set_text_vertical_align(lv.arclabel.TEXT_ALIGN.TRAILING)
+arclabel_slogan_2.set_text_horizontal_align(lv.arclabel.TEXT_ALIGN.CENTER)
+arclabel_slogan_2.set_dir(lv.arclabel.DIR.COUNTER_CLOCKWISE)
+arclabel_slogan_2.center()
+
+# The following requires the montserrat_18 and montserrat_24 fonts to be enabled in lv_conf.h
+# If they are disabled, simply comment the next 4 lines of code
+
+arclabel_inner.set_style_text_font(lv.font_montserrat_18, lv.PART.MAIN)
+arclabel_outer.set_style_text_font(lv.font_montserrat_18, lv.PART.MAIN)
+
+arclabel_slogan_1.set_style_text_font(lv.font_montserrat_24, lv.PART.MAIN)
+arclabel_slogan_2.set_style_text_font(lv.font_montserrat_24, LV_PART_MAIN)
+

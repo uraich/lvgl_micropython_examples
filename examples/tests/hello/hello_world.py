@@ -1,0 +1,7 @@
+# Create a white label, set its text and align it to the center
+label = lv.label(scr)
+label.set_text("Hello world")
+label.set_style_text_color(lv.color_hex(0xffffff), lv.PART.MAIN)
+scr.set_style_bg_color(lv.color_hex(0x00ff00), 0)
+scr.set_style_bg_opa(lv.OPA.COVER,0)
+label.align(lv.ALIGN.CENTER, 0, 0)

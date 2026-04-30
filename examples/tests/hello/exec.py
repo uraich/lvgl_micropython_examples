@@ -1,0 +1,50 @@
+#!/opt/bin/lvgl_micropy_unix
+from micropython import const  # NOQA
+import lcd_bus  # NOQA
+import time
+
+_WIDTH = const(480)
+_HEIGHT = const(320)
+
+bus = lcd_bus.SDLBus(flags=0)
+
+buf1 = bus.allocate_framebuffer(_WIDTH * _HEIGHT * 3, 0)
+
+
+import lvgl as lv  # NOQA
+import sdl_display  # NOQA
+
+def event_loop():
+    while lv.screen_active(): # exit when the screen is closed
+        time.sleep_ms(5)
+        lcd_bus._pump_main_thread()
+        
+display = sdl_display.SDLDisplay(
+    data_bus=bus,
+    display_width=_WIDTH,
+    display_height=_HEIGHT,
+    color_byte_order=sdl_display.BYTE_ORDER_BGR,
+    frame_buffer1=buf1,
+    color_space=lv.COLOR_FORMAT.RGB888
+)
+display.init()
+
+import sdl_pointer
+import task_handler
+
+mouse = sdl_pointer.SDLPointer()
+
+# the duration needs to be set to 5 to have a good response from the mouse.
+# There is a thread that runs that facilitates double buffering. 
+th = task_handler.TaskHandler(duration=5)
+
+scr = lv.screen_active()
+
+# Create a white label, set its text and align it to the center
+label = lv.label(scr)
+label.set_text("Hello world")
+label.set_style_text_color(lv.color_hex(0xffffff), lv.PART.MAIN)
+scr.set_style_bg_color(lv.color_hex(0x00ff00), 0)
+scr.set_style_bg_opa(lv.OPA.COVER,0)
+label.align(lv.ALIGN.CENTER, 0, 0)
+event_loop()
