@@ -38,8 +38,10 @@ This finally gave me an image on the screen but the colors were not what I expec
 There are 3 parameters you must get right to have the correct colors: On my screen I got white instead of black text. This can be corrected with : `display.set_color_inversion(1)`. Then there are screens, which take the rgb color components in this order: r,b,g but there are others which expect b,r,g. This can be adapted with `color_space=lv.COLOR_FORMAT.RGB565` when initializing the display. 
 The color is defined in rgb565 format (5 bits red, 6 bits green and 5 bits blue) which is a 16 bit number. To make sure that these 2 bytes are written in the correct order you can set `rgb565_byte_swap=True`, again in the display initalization.
 
-# Header amd trailer files
+# Header and trailer files
 For any program you write, you will need the same hardware initialization and an endless loop at the end of your program. I extracted these into a header.py and a trailer.py file. Your application must then only provide the GUI code. In order to get a working executable you have to concatenate header.py your_program.py and trailer.py
 `cat header.py your_program.py trailer.py > executable.py.
-
+I supply 2 shell scripts, which do exactly this
+* run_lvgl.sh does the concatenation of the files, makes the result executable and runs it under unix. The script is located 2 directories beyond the examples. In order to run the hello world example in getting started, you enter `./../run_lvgl.sh lv_example_getting_started_1.py. It will create exec.py in the getting_started directory and run it.
+* make_esp32.py works the same way as run_lvgl.sh except that only prepares the final program to be uploaded to the ESP32. In this cas the final program is called exec_esp32.py. Upload and run this program using thonny.
 
