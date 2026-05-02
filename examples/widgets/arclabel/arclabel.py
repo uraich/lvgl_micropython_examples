@@ -56,10 +56,12 @@ arclabel_slogan_2.center()
 
 # The following requires the montserrat_18 and montserrat_24 fonts to be enabled in lv_conf.h
 # If they are disabled, simply comment the next 4 lines of code
-
-arclabel_inner.set_style_text_font(lv.font_montserrat_18, lv.PART.MAIN)
-arclabel_outer.set_style_text_font(lv.font_montserrat_18, lv.PART.MAIN)
-
-arclabel_slogan_1.set_style_text_font(lv.font_montserrat_24, lv.PART.MAIN)
-arclabel_slogan_2.set_style_text_font(lv.font_montserrat_24, LV_PART_MAIN)
-
+try:
+    arclabel_inner.set_style_text_font(lv.font_montserrat_18, lv.PART.MAIN)
+    arclabel_outer.set_style_text_font(lv.font_montserrat_18, lv.PART.MAIN)
+except:
+    pass
+try:
+    arclabel_slogan_1.set_style_text_font(lv.font_montserrat_24, lv.PART.MAIN)
+    arclabel_slogan_2.set_style_text_font(lv.font_montserrat_24, LV_PART_MAIN)
+except: pass
